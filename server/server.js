@@ -21,6 +21,16 @@ app.use(cookieParser());
 userRoutes(app);
 bookRoutes(app);
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build')); //go to cd client, npm run build
+
+    const path = require('path');
+    
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));  //   '../client' teacher has
+    });
+}
+
 app.listen(port, () => {
     console.log(`server is up on port ${port}!`);
 });
