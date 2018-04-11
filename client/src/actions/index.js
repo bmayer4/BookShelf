@@ -55,15 +55,31 @@ async (dispatch, getState) => {
 
 export const getUserBooks = () =>
 async (dispatch, getState) => {
-    const res = await axios.get('/api/user/books').catch((e) => {
-        console.log(e);
-    });
-
+    const res = await axios.get('/api/user/books');  //no catch, using it in UsersPageContainer.js
+            //if valid user id, will return empty array of books, if non existing user id, will return 404, catch it in UsersPageContainer.js
     if (res) {
         dispatch({
             type: 'GET_USER_BOOKS',
             payload: res.data
         })
+    }
+}
+
+export const getUsersBooks = (id) =>
+async (dispatch, getState) => {
+    const res = await axios.get(`/api/user/${id}`);
+
+    if (res) {
+        dispatch({
+            type: 'GET_USERS_BOOKS',
+            payload: res.data
+        })
+    }
+}
+
+export const clearUsersBooks = () => {
+    return {
+        type: 'CLEAR_USERS_BOOKS'
     }
 }
 

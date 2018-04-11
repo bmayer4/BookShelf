@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getBook } from './../actions';
+import { Link } from 'react-router-dom';
 
 class BooksContainer extends Component {
 
@@ -12,7 +13,7 @@ class BooksContainer extends Component {
             });
         }
     }
-
+//<Link to={`/users/${book.ownerId._id}`}>
     renderBook = (book) => {
         return book ? (
             <div className="br_container">
@@ -20,7 +21,7 @@ class BooksContainer extends Component {
                 <h2>{book.name}</h2>
                 <h5>{book.author}</h5>
                 <div className="br_reviewer">
-                <span>Reviewed by:</span> {book.ownerId.firstName} {book.ownerId.lastName}
+                <span>Reviewed by:</span> <Link to={`/users/${book.ownerId._id}`}>{book.ownerId.firstName} {book.ownerId.lastName}</Link>
                 </div>
                 </div>
                 <div className="br_review">

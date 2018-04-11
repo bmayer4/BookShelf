@@ -29,9 +29,19 @@ class HomeContainer extends Component {
          )
     }
 
+    renderHeader = () => {
+        return (
+        <div className="users_page_header">
+        <div>Book Reviews</div>
+        </div> 
+        );
+    }
+
+
     render() {
     return (
             <div className="bookCont">
+            {this.renderHeader()}
             {this.renderItems(this.props.books)}
             {
                 !this.state.reachedEnd && this.props.books && this.props.books.length > 0 ? <div className="loadmore" onClick={this.loadMore}>

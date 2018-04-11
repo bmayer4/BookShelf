@@ -31,8 +31,7 @@ module.exports = (app) => {
     //INDIVIDUAL BOOK BY BOOK ID
     app.get('/api/books/:id', (req, res) => {
         const id = req.params.id;
-
-        Book.findOne({_id: id}).populate('ownerId').then((book) => {
+    Book.findOne({_id: id}).populate('ownerId').then((book) => {
         if (!book) {
             res.status(404).send();
             return console.log('Unable to find book');
@@ -57,9 +56,9 @@ module.exports = (app) => {
         });
 
         //ALL BOOKS BY USERID
-        app.get('/api/user/:id', auth, (req, res) => { 
+        app.get('/api/user/:id', (req, res) => { 
             let id = req.params.id
-            Book.find({ ownerId: id }).then((books) => {  
+            Book.find({ ownerId: id }).populate('ownerId').then((books) => {  
                 if (!books) {
                     res.status(404).send();
                     return;

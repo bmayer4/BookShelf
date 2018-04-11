@@ -46,12 +46,6 @@ export const SideNavItems = (props) => {
         },
         {
             type: 'navItem',
-            text: 'Reviews',
-            link: '/user/reviews',
-            restricted: false
-        },
-        {
-            type: 'navItem',
             text: 'Register',
             link: '/user/register',
             restricted: false

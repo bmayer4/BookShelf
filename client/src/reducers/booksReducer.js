@@ -1,6 +1,7 @@
 const initialState = {
     books: [],
     userBooks: [],
+    usersBooks: [],
     indivBook: {}
   }
 
@@ -17,6 +18,10 @@ const booksReducer = (state = initialState, action) => {
         return {...state, indivBook: action.payload.book }
         case 'GET_USER_BOOKS': 
         return {...state, userBooks: [...action.payload.books]}
+        case 'GET_USERS_BOOKS': 
+            return {...state, usersBooks: [...action.payload.books]};
+        case 'CLEAR_USERS_BOOKS':
+            return {...state, usersBooks: []}
         case 'DELETE_BOOK': 
 
         let remainingBooks = state.books.filter((book) => {
