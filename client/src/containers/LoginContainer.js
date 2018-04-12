@@ -11,12 +11,13 @@ class LoginContainer extends Component {
         error: ''
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log('np', nextProps);
-        if (nextProps.auth.auth) {  
-            this.props.history.push('/');
-        }
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     console.log('np', nextProps);
+    //     if (nextProps.auth.auth) {  
+    //         this.props.getUserBooks();
+    //         this.props.history.push('/');
+    //     }
+    // }
 
     onEmailChange = (e) => {
         const email = e.target.value;

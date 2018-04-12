@@ -8,7 +8,6 @@ class UserPosts extends Component {
 
     componentDidMount() {
         if (this.props.userBooks.length === 0) {
-            console.log('fetching from database');
             this.props.getUserBooks();
         }
     }

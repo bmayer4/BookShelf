@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getBooks } from './../actions';
+import { getBooks, getMoreBooks, getUserBooks } from './../actions';
 import BookItem from './../widgets/BookItem';
 
 class HomeContainer extends Component {
@@ -9,9 +9,17 @@ class HomeContainer extends Component {
         reachedEnd: false
     }
 
+    componentDidMount() {
+        this.props.getBooks(0, 3, 'asc');
+        if (this.props.auth.auth && this.props.userBooks.length === 0) {  //we redirect here on login
+            console.log('fetching user books');
+            this.props.getUserBooks();
+        }
+    }
+
     loadMore = () => {
      let prev = this.props.books.length;
-     this.props.getBooks(this.props.books.length, 3, 'asc').then(() => {
+     this.props.getMoreBooks(this.props.books.length, 3, 'asc').then(() => {
         if (this.props.books.length === prev) {
             this.setState({ reachedEnd: true });
         }
@@ -56,12 +64,16 @@ class HomeContainer extends Component {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-      books: state.books.books
+      auth: state.auth, 
+      books: state.books.books,
+      userBooks: state.books.userBooks
     };
   };
 
 const mapDispatchToProps = (dispatch) => ({
-    getBooks: (skip, limit, order) => dispatch(getBooks(skip, limit, order))
+    getBooks: (skip, limit, order) => dispatch(getBooks(skip, limit, order)),
+    getMoreBooks: (skip, limit, order) => dispatch(getMoreBooks(skip, limit, order)),
+    getUserBooks: () => { dispatch(getUserBooks()) }
 });
   
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

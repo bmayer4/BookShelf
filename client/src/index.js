@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 //import promiseMiddleware from 'redux-promise';
 import thunk from 'redux-thunk';
-import { getBooks, checkAuth } from './actions';
+import { getBooks, checkAuth, getUserBooks } from './actions';
 import Loader from '../src/components/Loader';
 
 const store = createStore(reducers, {}, applyMiddleware(thunk));  
@@ -15,7 +15,7 @@ ReactDOM.render(<Loader />, document.getElementById('root'));
 
 //let rendered = false
 console.log('rendered');
-store.dispatch(getBooks(0, 3, 'asc'));
+// store.dispatch(getBooks(0, 3, 'asc'));
 store.dispatch(checkAuth()).then(() => {
     ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 });

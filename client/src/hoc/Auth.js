@@ -15,7 +15,6 @@ export default (ComposedClass, restrict) => {
 
             case 'private': {
                 if (this.props.auth.auth) {
-                    console.log('private')
                     return <ComposedClass {...this.props} />
                 } else {
                     return this.props.history.push('/user/login');
@@ -23,7 +22,6 @@ export default (ComposedClass, restrict) => {
             }
             case 'public': {  //login
                 if (this.props.auth.auth) {
-                    console.log('not private');
                     return this.props.history.push('/');
                 } else {
                     return <ComposedClass {...this.props} />

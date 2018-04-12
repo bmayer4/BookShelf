@@ -27,6 +27,16 @@ async (dispatch, getState) => {
         });
 };
 
+export const getMoreBooks = (start = 0, limit = 10, order = 'asc') => 
+async (dispatch, getState) => {
+    const res = await axios.get(`/api/books?skip=${start}&limit=${limit}&order=${order}`); 
+        dispatch({
+            type: 'GET_MORE_BOOKS',
+            payload: res.data
+        });
+};
+
+
 export const getBook = (id) => 
 async (dispatch, getState) => {
     const res = await axios.get(`/api/books/${id}`);
@@ -35,6 +45,10 @@ async (dispatch, getState) => {
             payload: res.data
         });
 };
+
+
+
+
 
 
 export const addBook = (book) =>
@@ -52,11 +66,9 @@ async (dispatch, getState) => {
 }
 
 
-
 export const getUserBooks = () =>
 async (dispatch, getState) => {
-    const res = await axios.get('/api/user/books');  //no catch, using it in UsersPageContainer.js
-            //if valid user id, will return empty array of books, if non existing user id, will return 404, catch it in UsersPageContainer.js
+    const res = await axios.get('/api/user/books'); 
     if (res) {
         dispatch({
             type: 'GET_USER_BOOKS',
@@ -67,8 +79,8 @@ async (dispatch, getState) => {
 
 export const getUsersBooks = (id) =>
 async (dispatch, getState) => {
-    const res = await axios.get(`/api/user/${id}`);
-
+    const res = await axios.get(`/api/user/${id}`);  //no catch, using it in UsersPageContainer.js
+            //if valid user id, will return empty array of books, if non existing user id, will return 404, catch it in UsersPageContainer.js
     if (res) {
         dispatch({
             type: 'GET_USERS_BOOKS',
@@ -160,6 +172,7 @@ async (dispatch, getState) => {
 }
 
 
+
 export const getUsers = () => {
     return async (dispatch, getState) => {
 
@@ -177,13 +190,13 @@ export const getUsers = () => {
 
 export const logoutUser = () =>
 async (dispatch, getState) => {
-    const res = await axios.delete('/api/logout');
-    
-            if (res) {
-                dispatch({
-                    type: 'USER_LOGOUT',
-                    payload: res.data
-                })
-            }
+    const res = await axios.delete('/api/logout').catch((e) => {
+        console.log(e);
+    });
+    console.log(res.data);
+
+             dispatch({ 
+                type: 'USER_LOGOUT'
+            })
 }
 
