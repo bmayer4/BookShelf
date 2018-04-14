@@ -10,7 +10,7 @@ class BooksContainer extends Component {
             console.log('hit database');
             this.props.getBook(this.props.match.params.id).catch(() => {
                 this.props.history.push('/');
-            });
+            }); 
         }
     }
 //<Link to={`/users/${book.ownerId._id}`}>

@@ -20,8 +20,7 @@ const authReducer = (state = initialState, action) => {
         case 'AUTH_ERROR':
         return { auth: false, registered: false, error: action.payload }
         case 'USER_LOGOUT':
-        //return { ...state, auth: false, registered: false }  //should clear everything
-        return initialState;
+        return { ...state, auth: false, registered: false }  //should clear everything
         default:
             return state
     }

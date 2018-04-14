@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+
+
 export default (ComposedClass, restrict) => {
 
  class AuthenticationCheck extends Component {
 
-    state = {
-        loading: true
-    }
 
     renderClass = () => {
 
@@ -41,7 +40,7 @@ export default (ComposedClass, restrict) => {
              </div>
          );
      }
- }
+ } //end class
 
  const mapStateToProps = (state, ownProps) => {
     return {
@@ -52,5 +51,5 @@ export default (ComposedClass, restrict) => {
 return connect(mapStateToProps)(AuthenticationCheck)
 
 
-}
+}  //end function
 

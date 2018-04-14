@@ -21,34 +21,40 @@ import axios from 'axios';
 export const getBooks = (start = 0, limit = 10, order = 'asc') => 
 async (dispatch, getState) => {
     const res = await axios.get(`/api/books?skip=${start}&limit=${limit}&order=${order}`); 
+
+    if (res) {
         dispatch({
             type: 'GET_BOOKS',
             payload: res.data
         });
+    }
 };
 
 export const getMoreBooks = (start = 0, limit = 10, order = 'asc') => 
 async (dispatch, getState) => {
     const res = await axios.get(`/api/books?skip=${start}&limit=${limit}&order=${order}`); 
+
+    if (res) {
         dispatch({
             type: 'GET_MORE_BOOKS',
             payload: res.data
         });
+    }
 };
 
 
 export const getBook = (id) => 
 async (dispatch, getState) => {
     const res = await axios.get(`/api/books/${id}`);
+    //do not want to 'not' check for res If I have no catch in the dispatch call (catch on await doesn't help either if not catching main dispatch)
+
+    if (res) {
         dispatch({
             type: 'GET_BOOK',
             payload: res.data
         });
+    }
 };
-
-
-
-
 
 
 export const addBook = (book) =>
@@ -170,7 +176,6 @@ async (dispatch, getState) => {
         })
     }
 }
-
 
 
 export const getUsers = () => {
